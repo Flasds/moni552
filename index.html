@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>发布公告</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .notice {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+    <script>
+        function publishNotice() {
+            var inputText = document.getElementById("noticeText").value;
+            
+            if (inputText.trim() !== "") {
+                var noticeContainer = document.createElement("div");
+                noticeContainer.className = "notice";
+                
+                var noticeContent = document.createElement("p");
+                noticeContent.textContent = inputText;
+                
+                noticeContainer.appendChild(noticeContent);
+                
+                document.getElementById("notices").appendChild(noticeContainer);
+                
+                document.getElementById("noticeText").value = "";
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>发布公告</h1>
+    </header>
+    <div class="container">
+        <textarea id="noticeText" rows="4" cols="50" placeholder="在这里输入公告内容..."></textarea>
+        <button onclick="publishNotice()">发布</button>
+        <div id="notices"></div>
+    </div>
+</body>
+</html>
