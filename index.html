@@ -25,8 +25,24 @@
             margin-bottom: 1rem;
         }
     </style>
+</head>
+<body>
+    <header>
+        <h1>发布公告</h1>
+    </header>
+    <div class="container">
+        <textarea id="noticeText" rows="4" cols="50" placeholder="在这里输入公告内容..."></textarea>
+        <button id="publishButton">发布</button>
+        <div id="notices"></div>
+    </div>
     <script>
-        function publishNotice() {
+        var savedNotices = localStorage.getItem("notices");
+
+        if (savedNotices) {
+            document.getElementById("notices").innerHTML = savedNotices;
+        }
+
+        document.getElementById("publishButton").addEventListener("click", function() {
             var inputText = document.getElementById("noticeText").value;
             
             if (inputText.trim() !== "") {
@@ -41,18 +57,12 @@
                 document.getElementById("notices").appendChild(noticeContainer);
                 
                 document.getElementById("noticeText").value = "";
+                
+                var existingNotices = localStorage.getItem("notices") || "";
+                var newNotice = "<div class='notice'><p>" + inputText + "</p></div>";
+                localStorage.setItem("notices", existingNotices + newNotice);
             }
-        }
+        });
     </script>
-</head>
-<body>
-    <header>
-        <h1>发布公告</h1>
-    </header>
-    <div class="container">
-        <textarea id="noticeText" rows="4" cols="50" placeholder="在这里输入公告内容..."></textarea>
-        <button onclick="publishNotice()">发布</button>
-        <div id="notices"></div>
-    </div>
 </body>
 </html>
